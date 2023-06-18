@@ -1,0 +1,75 @@
+$(function(){
+	
+	$.getScript('https://corestudiodesign.com/wp-content/themes/corestudio/assets/js/min.js', function(){ 
+	
+		spamSpan();
+	
+		$('body').on('click', '.expand:not(.active)', function(e){
+			$('html,body').animate({scrollTop: 0}, 100);
+			setTimeout(function(){
+				$('body').css({'overflow':'hidden'});
+				$('nav, .expand, header').addClass('active');
+			}, 200);
+			return false;
+		});
+		
+		$('body').on('click', '.expand.active', function(e){
+			$('nav, .expand, header').removeClass('active');
+			$('body').css({'overflow':'auto'});
+			return false;
+		});
+		
+		$('h2 p').contents().unwrap();
+		
+		$('.gallery img').first().addClass('hero');
+		
+		if(!$('.paginate .prev a').length){
+			$('.paginate .prev').css({'visibility':'hidden'});
+		}
+		
+		if(!$('.paginate .next a').length){
+			$('.paginate .next').css({'visibility':'hidden'});
+		}
+		
+		$('body').on('click', '.gallery img', function(e){
+			if($(window).width() > 1260){
+				$('h3#gall').addClass('full');
+				$('.gallery').css({'opacity':'0'});
+				setTimeout(function(){
+					$('.gallery img').parent().parent().addClass('full');
+					
+					setTimeout(function(){
+						$('.gallery').css({'opacity':'1'});
+					}, 200);
+					
+				}, 300);
+			} else {
+				return false;
+			}
+		});
+		
+		$('body').on('click', '.gallery .full img', function(e){
+			if($(window).width() > 1260){
+				$('h3#gall').removeClass('full');
+				$('.gallery').css({'opacity':'0'});
+				setTimeout(function(){
+					$('.gallery img').parent().parent().removeClass('full');
+					
+					setTimeout(function(){
+						$('.gallery').css({'opacity':'1'});
+					}, 200);
+					
+				}, 300);
+			} else {
+				return false;
+			}
+		});
+		
+		$('body').on('click', '.read-more', function(e){
+			$('.read-more').addClass('active');
+			$('.design-toggle').addClass('active');
+		});
+		
+	});
+	
+});
